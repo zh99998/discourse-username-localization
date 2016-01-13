@@ -14,7 +14,7 @@ after_initialize do
         url.gsub! "{color}", letter_avatar_color(username.downcase)
         url.gsub! "{username}", username
         if username[0] =~ /[^\w]/
-          url.gsub! "{first_letter}", Pinyin.t(username).to_s[0].downcase
+          url.gsub! "{first_letter}", (Pinyin.t(username).strip.to_s[0] || '_').downcase
         else
           url.gsub! "{first_letter}", username[0].downcase
         end
@@ -55,7 +55,7 @@ after_initialize do
         Digest::MD5.hexdigest(username)[0...15].to_i(16) % LetterAvatar::COLORS.length
       ]
       if username[0] =~ /[^\w]/
-        identity.letter = Pinyin.t(username).to_s[0].upcase
+        identity.letter = (Pinyin.t(username).strip.to_s[0] || '_').upcase
       else
         identity.letter = username[0].upcase
       end
