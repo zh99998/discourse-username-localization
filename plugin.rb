@@ -28,21 +28,21 @@ after_initialize do
   UsernameValidator.class_eval do
     def username_char_valid?
       return unless errors.empty?
-      if username =~ /[^\w\u4E00-\u9FCC\u3400-\u4DB5\u20000-\u2A6D6\u2A700-\u2B734\u2B740-\u2B81D\u3005\u3040-\u30FF.-]/
+      if username =~ /[^\w\u4E00-\u9FD5\u3400-\u4DBF\u{20000}-\u{2A6DF}\u{2A700}-\u{2CEAF}\uF900–\uFAFF\u{2F800}-\u{2FA1D}\uAC00–\uD7AF\u3040-\u30FF\u31F0–\u31FF\u{1B000}–\u{1B0FF}\u3005.-]/
         self.errors << I18n.t(:'user.username.characters')
       end
     end
 
     def username_first_char_valid?
       return unless errors.empty?
-      if username[0] =~ /[^\w\u4E00-\u9FCC\u3400-\u4DB5\u20000-\u2A6D6\u2A700-\u2B734\u2B740-\u2B81D\u3005\u3040-\u30FF]/
+      if username[0] =~ /[^\w\u4E00-\u9FD5\u3400-\u4DBF\u{20000}-\u{2A6DF}\u{2A700}-\u{2CEAF}\uF900–\uFAFF\u{2F800}-\u{2FA1D}\uAC00–\uD7AF\u3040-\u30FF\u31F0–\u31FF\u{1B000}–\u{1B0FF}\u3005]/
         self.errors << I18n.t(:'user.username.must_begin_with_alphanumeric')
       end
     end
 
     def username_last_char_valid?
       return unless errors.empty?
-      if username[-1] =~ /[^\w\u4E00-\u9FCC\u3400-\u4DB5\u20000-\u2A6D6\u2A700-\u2B734\u2B740-\u2B81D\u3005\u3040-\u30FF]/
+      if username[-1] =~ /[^\w\u4E00-\u9FD5\u3400-\u4DBF\u{20000}-\u{2A6DF}\u{2A700}-\u{2CEAF}\uF900–\uFAFF\u{2F800}-\u{2FA1D}\uAC00–\uD7AF\u3040-\u30FF\u31F0–\u31FF\u{1B000}–\u{1B0FF}\u3005]/
         self.errors << I18n.t(:'user.username.must_end_with_alphanumeric')
       end
     end
