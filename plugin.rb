@@ -4,6 +4,7 @@
 # authors: freemangl, zh99998 <zh99998@gmail.com>
 
 gem "chinese_pinyin", "1.0.0"
+gem "romaji", "0.2.3"
 
 after_initialize do
   User.class_eval do
@@ -14,7 +15,7 @@ after_initialize do
         url.gsub! "{color}", letter_avatar_color(username.downcase)
         url.gsub! "{username}", username
         if username[0] =~ /[^\w]/
-          url.gsub! "{first_letter}", (Pinyin.t(username).strip.to_s[0] || '_').downcase
+          url.gsub! "{first_letter}", (Pinyin.t(Romaji.kana2romaji(username)).strip.to_s[0] || '_').downcase
         else
           url.gsub! "{first_letter}", username[0].downcase
         end
@@ -55,7 +56,7 @@ after_initialize do
         Digest::MD5.hexdigest(username)[0...15].to_i(16) % LetterAvatar::COLORS.length
       ]
       if username[0] =~ /[^\w]/
-        identity.letter = (Pinyin.t(username).strip.to_s[0] || '_').upcase
+        identity.letter = (Pinyin.t(Romaji.kana2romaji(username)).strip.to_s[0] || '_').upcase
       else
         identity.letter = username[0].upcase
       end
