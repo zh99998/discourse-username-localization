@@ -1,7 +1,10 @@
 #!/bin/bash
 
 sed -i 's/^USERNAME_ROUTE_FORMAT =.*$/USERNAME_ROUTE_FORMAT = \/[A-Za-z0-9\\_.\\-\\%\\u4E00-\\u9FD5\\u3400-\\u4DBF\\u{20000}-\\u{2A6DF}\\u{2A700}-\\u{2CEAF}\\uF900–\\uFAFF\\u{2F800}-\\u{2FA1D}\\uAC00–\\uD7AF\\u3040-\\u30FF\\u31F0–\\u31FF\\u{1B000}–\\u{1B0FF}\\u3005]+\/ unless defined? USERNAME_ROUTE_FORMAT/' ../config/routes.rb
-
+sed -i 's/^\s*username =.*$/    username = username.toString().replace(\/[^A-Za-z0-9_\\u4E00-\\u9FD5\\u3400-\\u4DBF\\u{20000}-\\u{2A6DF}\\u{2A700}-\\u{2CEAF}\\uF900–\\uFAFF\\u{2F800}-\\u{2FA1D}\\uAC00–\\uD7AF\\u3040-\\u30FF\\u31F0–\\u31FF\\u{1B000}–\\u{1B0FF}\\u3005\\.\\-]\/gu, "");' ../app/assets/javascripts/discourse/controllers/user-card.js.es6
+sed -i 's/^\characters:.*$/      characters: "必须只包含中文、字母、数字和下划线"' ../config/locales/server.zh_CN.yml
+sed -i 's/^\must_begin_with_alphanumeric:.*$/      must_begin_with_alphanumeric: "必须以中文、字母、数字或下划线开头"' ../config/locales/server.zh_CN.yml
+sed -i 's/^\must_end_with_alphanumeric:.*$/      must_end_with_alphanumeric: "必须以中文、字母、数字或下划线结尾"' ../config/locales/server.zh_CN.yml
 # converted from
 # /^@([\w\u4E00-\u9FD5\u3400-\u4DBF\u{20000}-\u{2A6DF}\u{2A700}-\u{2CEAF}\uF900-\uFAFF\u{2F800}-\u{2FA1D}\uAC00-\uD7AF\u3040-\u30FF\u31F0-\u31FF\u{1B000}-\u{1B0FF}\u3005][\w\u4E00-\u9FD5\u3400-\u4DBF\u{20000}-\u{2A6DF}\u{2A700}-\u{2CEAF}\uF900-\uFAFF\u{2F800}-\u{2FA1D}\uAC00-\uD7AF\u3040-\u30FF\u31F0-\u31FF\u{1B000}-\u{1B0FF}\u3005.-]{0,59})(?![\w\u4E00-\u9FD5\u3400-\u4DBF\u{20000}-\u{2A6DF}\u{2A700}-\u{2CEAF}\uF900-\uFAFF\u{2F800}-\u{2FA1D}\uAC00-\uD7AF\u3040-\u30FF\u31F0-\u31FF\u{1B000}-\u{1B0FF}\u3005])/iu
 # by https://mothereff.in/regexpu
