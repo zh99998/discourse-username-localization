@@ -5,8 +5,10 @@
 
 gem "chinese_pinyin", "1.0.0"
 gem "romaji", "0.2.3"
-
 after_initialize do
+
+  ::USERNAME_ROUTE_FORMAT = /[\w.\-\u4E00-\u9FD5\u3400-\u4DBF\u{20000}-\u{2A6DF}\u{2A700}-\u{2CEAF}\uF900–\uFAFF\u{2F800}-\u{2FA1D}\uAC00–\uD7AF\u3040-\u30FF\u31F0–\u31FF\u{1B000}–\u{1B0FF}\u3005]+?/
+
   User.class_eval do
     def self.system_avatar_template(username)
       # TODO it may be worth caching this in a distributed cache, should be benched
