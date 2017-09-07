@@ -32,3 +32,19 @@ bundle exec rake assets:clean
 
 bundle exec rails s -b 0.0.0.0
 ```
+
+## Update
+
+### Vagrant
+
+```
+vagrant ssh
+
+cd /vagrant
+
+bundle exec rake plugin:update plugin=discourse-username-localization
+
+bundle exec rake assets:clean
+
+bundle exec rails s -b 0.0.0.0
+```
