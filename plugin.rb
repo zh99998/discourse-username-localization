@@ -15,6 +15,7 @@ after_initialize do
       # TODO it may be worth caching this in a distributed cache, should be benched
       if SiteSetting.external_system_avatars_enabled
         url = SiteSetting.external_system_avatars_url.dup
+        url = "#{Discourse::base_uri}#{url}" unless url =~ /^https?:\/\//
         url.gsub! "{color}", letter_avatar_color(username.downcase)
         url.gsub! "{username}", username
         if username[0] =~ /[^\w]/
@@ -22,6 +23,7 @@ after_initialize do
         else
           url.gsub! "{first_letter}", username[0].downcase
         end
+        url.gsub! "{hostname}", Discourse.current_hostname
         url
       else
         "#{Discourse.base_uri}/letter_avatar/#{username.downcase}/{size}/#{LetterAvatar.version}.png"
