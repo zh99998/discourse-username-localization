@@ -16,7 +16,6 @@ hooks:
         cmd:
           - git clone https://github.com/discourse/docker_manager.git
           - git clone https://github.com/zh99998/discourse-username-localization.git
-          - bash discourse-username-localization/install.sh
 ```          
 
 ### Vagrant
